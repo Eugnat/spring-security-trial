@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+      ">
+
+    <http use-expressions="true" auto-config="true" >
+        <intercept-url pattern="/" access="permitAll()" />
+        <intercept-url pattern="/servlet" access="isAuthenticated()"/>
+        <intercept-url pattern="/trial" access="hasRole('ROLE_ADMIN')"/>
+    </http>
+
+    <authentication-manager>
+        <authentication-provider>
+            <user-service>
+                <user name="user1" password="$2a$10$12qY2/taaptsuJfJbR4GZuFA9fJDbZV6z/PZj9X44U5ArUE4UoCv6" authorities="ROLE_ADMIN" />
+                <user name="user2" password="$2a$10$AtnBBhALlugT3xH9S4WfgOkkObBlGsc4c7qHqPY0ScBnSiO7L9Z6a" authorities="ROLE_USER"/>
+            </user-service>
+            <password-encoder ref="encoder" />
+        </authentication-provider>
+    </authentication-manager>
+
+
+    <beans:bean id="encoder"
+                class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+    </beans:bean>
+
+</beans:beans>

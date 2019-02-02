@@ -11,6 +11,9 @@
 </head>
 <body>
   <div class="container-fluid text-info">
+      <div sec:authorize="isAuthenticated()">
+          <p>Welcome, <span th:text="${#authentication.name}">user</span>!</p>
+      </div>
   <p>Servlet page from Thymeleaf</p>
   <p><a th:href="@{/trial}">Trial page</a></p>
   <p><a th:href="@{/index}">Index page</a></p>

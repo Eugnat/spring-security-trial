@@ -1,5 +1,6 @@
 package webdemo;
 
+import org.springframework.core.annotation.Order;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 import webdemo.config.SecurityConfiguration;
 import webdemo.config.WebMvcConfiguration;
@@ -7,6 +8,7 @@ import webdemo.config.WebMvcConfiguration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
+@Order(1)
 public class WebAppInitializer
         extends AbstractAnnotationConfigDispatcherServletInitializer {
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8"/>
     <title>Trial</title>
@@ -7,5 +7,12 @@
 <body>
   <p>Trial page from Thymeleaf</p>
   <p th:text="${trialLine}" />
+  <p><a th:href="@{/servlet}">Servlet page</a></p>
+  <p><a th:href="@{/index}">Index page</a></p>
+  <div sec:authorize="isAuthenticated()">
+      <form th:action="@{/logout}" th:method="post">
+          <input type="submit" value="Log out"/>
+      </form>
+  </div>
 </body>
 </html>

@@ -24,7 +24,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/").permitAll()
                                 .antMatchers("/servlet", "/trial").authenticated()
                                 .and()
-                                .formLogin();
+                                .formLogin()
+                                .and()
+                                .logout()
+                                .logoutSuccessUrl("/");
     }
 
     @Override

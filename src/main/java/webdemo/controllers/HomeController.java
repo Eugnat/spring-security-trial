@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpSession;
+
 @Controller("/")
 public class HomeController {
 
@@ -22,6 +24,7 @@ public class HomeController {
     @GetMapping("/servlet")
     public String servlet(Model model) {
         model.addAttribute("trialLine", "Trial line");
+        model.addAttribute("trialLine1", "Trial line 2");
         return "servlet";
     }
 }

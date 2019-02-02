@@ -10,21 +10,22 @@ import javax.servlet.http.HttpSession;
 public class HomeController {
 
     @GetMapping
-    public String index(Model model) {
-        model.addAttribute("trialLine", "Trial line");
+    public String index() {
         return "index";
     }
 
     @GetMapping("/trial")
-    public String trial(Model model) {
-        model.addAttribute("trialLine", "Trial line");
+    public String trial() {
         return "trial";
     }
 
     @GetMapping("/servlet")
-    public String servlet(Model model) {
-        model.addAttribute("trialLine", "Trial line");
-        model.addAttribute("trialLine1", "Trial line 2");
+    public String servlet() {
         return "servlet";
+    }
+
+    @GetMapping("/myLogin")
+    public String login() {
+        return "login";
     }
 }

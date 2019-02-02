@@ -25,6 +25,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                 .antMatchers("/servlet", "/trial").authenticated()
                                 .and()
                                 .formLogin()
+                                .loginProcessingUrl("/login")
+                                .loginPage("/myLogin")
+                                .usernameParameter("username")
+                                .passwordParameter("userpassword")
+                                .permitAll()
                                 .and()
                                 .logout()
                                 .logoutSuccessUrl("/");

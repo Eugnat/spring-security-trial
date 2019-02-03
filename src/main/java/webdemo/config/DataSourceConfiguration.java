@@ -3,6 +3,7 @@ package webdemo.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 
 import javax.sql.DataSource;
 
@@ -17,6 +18,13 @@ public class DataSourceConfiguration {
         dataSource.setUsername("root");
         dataSource.setPassword("root");
         return dataSource;
+    }
+
+    @Bean
+    public JdbcUserDetailsManager userDetailsManager() {
+        JdbcUserDetailsManager detailsManager = new JdbcUserDetailsManager();
+        detailsManager.setDataSource(getDataSource());
+        return detailsManager;
     }
 
 }

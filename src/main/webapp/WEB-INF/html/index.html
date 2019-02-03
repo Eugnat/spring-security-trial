@@ -21,7 +21,9 @@
       <form th:action="@{/logout}" th:method="post">
           <input type="submit" value="Log out"/>
       </form>
+      <p><a th:href="@{/createUser}">Create user</a></p>
   </div>
+      <p th:text="${infoString}" class="text-danger"></p>
   </div>
 </body>
 </html>

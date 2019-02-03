@@ -18,4 +18,5 @@ public class DataSourceConfiguration {
         dataSource.setPassword("root");
         return dataSource;
     }
+
 }

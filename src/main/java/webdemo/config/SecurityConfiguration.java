@@ -1,49 +1,31 @@
 package webdemo.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import webdemo.services.MySampleInterface;
-import webdemo.services.MySampleInterfaceImpl;
 import webdemo.services.MyUserDetailsService;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Bean
-    public MySampleInterface mySampleInterface() {
-        MySampleInterfaceImpl myInterface = new MySampleInterfaceImpl();
-        return myInterface;
-    }
+    @Autowired
+    private DataSource dataSource;
 
     @Bean
     public PasswordEncoder encoder() {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         return encoder;
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-       MyUserDetailsService userDetailsService = new MyUserDetailsService();
-       return userDetailsService;
-    }
-
-    @Bean
-    public DaoAuthenticationProvider getAuthenticationProvider() {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userDetailsService());
-        authenticationProvider.setPasswordEncoder(encoder());
-        return authenticationProvider;
     }
 
     @Override
@@ -64,7 +46,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(getAuthenticationProvider());
+        auth.jdbcAuthentication()
+                .dataSource(dataSource)
+                .usersByUsernameQuery("SELECT username, password, enabled FROM users WHERE username = ?")
+                .authoritiesByUsernameQuery("SELECT authority, username FROM authorities WHERE username = ?")
+                .passwordEncoder(encoder());
     }
 
 }

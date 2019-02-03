@@ -17,7 +17,6 @@
   <p>Index page from Thymeleaf</p>
   <p><a th:href="@{/servlet}">Servlet page</a></p>
   <p><a th:href="@{/trial}">Trial page</a></p>
-  <p th:text="${trial}"></p>
   <div sec:authorize="isAuthenticated()">
       <form th:action="@{/logout}" th:method="post">
           <input type="submit" value="Log out"/>

@@ -14,15 +14,6 @@ public class HomeController {
     @GetMapping
     public String index(Model model) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if (authentication != null) {
-            model.addAttribute("trial", authentication.getName());
-        }
-        else {
-            model.addAttribute("trial", "No user");
-        }
-
         return "index";
     }
 

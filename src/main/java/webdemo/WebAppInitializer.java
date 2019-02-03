@@ -2,6 +2,7 @@ package webdemo;
 
 import org.springframework.core.annotation.Order;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import webdemo.config.DataSourceConfiguration;
 import webdemo.config.SecurityConfiguration;
 import webdemo.config.WebMvcConfiguration;
 
@@ -14,7 +15,7 @@ public class WebAppInitializer
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] {SecurityConfiguration.class};
+        return new Class[] {SecurityConfiguration.class, DataSourceConfiguration.class};
     }
 
     @Override

@@ -56,9 +56,6 @@ public class WebMvcConfiguration implements WebMvcConfigurer {
         return messageSource;
     }
 
-
-
-
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
         registry.viewResolver(viewResolver());

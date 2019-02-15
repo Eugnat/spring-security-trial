@@ -14,7 +14,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-@EnableJpaRepositories(basePackages = "webdemo.repositories")
+@EnableJpaRepositories(basePackages = {"webdemo.entities", "webdemo.repositories", "webdemo.services"})
 @EnableTransactionManagement
 @Configuration
 public class SpringDataConfiguration {

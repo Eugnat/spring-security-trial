@@ -16,7 +16,7 @@ public class WebAppInitializer
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] {SecurityConfiguration.class, DataSourceConfiguration.class, SpringDataConfiguration.class};
+        return new Class[] {DataSourceConfiguration.class, SecurityConfiguration.class, SpringDataConfiguration.class};
     }
 
     @Override

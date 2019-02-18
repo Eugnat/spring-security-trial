@@ -8,23 +8,22 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import webdemo.entities.MyUser;
-import webdemo.entities.Role;
-import webdemo.repositories.UserRepository;
+import webdemo.mongoentities.MongoRole;
+import webdemo.mongoentities.MyMongoUser;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Component
-public class JpaUserDetailService implements UserDetailsService {
+public class MongoUserDetailService implements UserDetailsService {
 
     @Autowired
-    private UserRepository repository;
+    private MyUserService repository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        MyUser myUser = repository.findByUsername(username);
+        MyMongoUser myUser = repository.findByUsername(username);
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
@@ -32,7 +31,7 @@ public class JpaUserDetailService implements UserDetailsService {
             throw new UsernameNotFoundException("User doesn't have any roles");
         }
 
-        for (Role role : myUser.getRoles()) {
+        for (MongoRole role : myUser.getRoles()) {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
         }
 

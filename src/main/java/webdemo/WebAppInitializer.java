@@ -2,10 +2,7 @@ package webdemo;
 
 import org.springframework.core.annotation.Order;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-import webdemo.config.DataSourceConfiguration;
-import webdemo.config.SecurityConfiguration;
-import webdemo.config.SpringDataConfiguration;
-import webdemo.config.WebMvcConfiguration;
+import webdemo.config.*;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -16,7 +13,7 @@ public class WebAppInitializer
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] {DataSourceConfiguration.class, SecurityConfiguration.class, SpringDataConfiguration.class};
+        return new Class[] {MongoDbConfiguration.class, SecurityConfiguration.class};
     }
 
     @Override

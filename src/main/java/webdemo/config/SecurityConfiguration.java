@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import webdemo.services.JpaUserDetailService;
+import webdemo.services.MongoUserDetailService;
 
 @Configuration
 @EnableWebSecurity
@@ -23,7 +23,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        JpaUserDetailService userDetailService = new JpaUserDetailService();
+        MongoUserDetailService userDetailService = new MongoUserDetailService();
         return userDetailService;
     }
 
